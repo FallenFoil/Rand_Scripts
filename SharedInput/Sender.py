@@ -19,12 +19,13 @@ def on_press(key):
 
 def on_release(key):
     global sending
-    if key == Key.esc:
-        sending = False
-        print("stop sending")
-    elif key == Key.print_screen:
-        print("start sending")
-        sending = True
+    if key == Key.print_screen:
+        if sending:
+            sending = False
+            print("stop sending")
+        else:
+            print("start sending")
+            sending = True
 
 with Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
